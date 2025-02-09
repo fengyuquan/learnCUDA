@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include <cuda.h>
 #include "cuda_runtime.h"
 #include "device_launch_parameters.h"
@@ -61,11 +62,11 @@ int main(int argc, char const *argv[])
     {
         input[i] = 1;
     }
-    out = (float *)malloc(BLOCK_NUM * sizeof(float))     // 输出的数据内存大小
-        res = (float *)malloc(BLOCK_NUM * sizeof(float)) // 输出的数据内存大小
+    out = (float *)malloc(BLOCK_NUM * sizeof(float)); // 输出的数据内存大小
+    res = (float *)malloc(BLOCK_NUM * sizeof(float)); // 输出的数据内存大小
 
-        // 初始化GPU内存
-        cudaMalloc((void **)&d_input, N * sizeof(float));
+    // 初始化GPU内存
+    cudaMalloc((void **)&d_input, N * sizeof(float));
     cudaMalloc((void **)&d_out, BLOCK_NUM * sizeof(float));
     cudaMemcpy(d_input, input, N * sizeof(float), cudaMemcpyHostToDevice);
 
